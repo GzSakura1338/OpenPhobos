@@ -1,0 +1,50 @@
+{
+  "targets": [
+    "bufIn",
+    "origin",
+    "swap",
+    "bufOut"
+  ],
+  "passes": [
+    {
+      "name": "blit",
+      "intarget": "bufIn",
+      "outtarget": "origin",
+      "uniforms": []
+    },
+    {
+      "name": "phoboslite:color",
+      "intarget": "bufIn",
+      "outtarget": "swap",
+      "uniforms": []
+    },
+    {
+      "name": "phoboslite:blur_mask",
+      "intarget": "swap",
+      "outtarget": "bufIn",
+      "uniforms": [
+        { "name": "direction", "values": [1.0, 0.0] }
+      ]
+    },
+    {
+      "name": "phoboslite:blur_mask",
+      "intarget": "bufIn",
+      "outtarget": "swap",
+      "uniforms": [
+        { "name": "direction", "values": [0.0, 1.0] }
+      ]
+    },
+    {
+      "name": "phoboslite:s_line",
+      "intarget": "swap",
+      "outtarget": "bufOut",
+      "auxtargets": [
+        {
+          "name": "MaskSampler",
+          "id": "origin"
+        }
+      ],
+      "uniforms": []
+    }
+  ]
+}

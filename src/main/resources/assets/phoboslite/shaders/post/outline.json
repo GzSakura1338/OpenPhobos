@@ -1,0 +1,13 @@
+{
+  "targets": [
+    "inp", "out"
+  ],
+  "passes": [
+    {
+      "name": "phoboslite:outline",
+      "intarget": "inp",
+      "outtarget": "out",
+      "uniforms": [ ]
+    }
+  ]
+}

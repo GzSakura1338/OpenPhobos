@@ -1,0 +1,47 @@
+{
+  "hard": {
+    "sounds": [
+      "phoboslite:hard"
+    ]
+  },
+  "metal": {
+    "sounds": [
+      "phoboslite:metal"
+    ]
+  },
+  "normal": {
+    "sounds": [
+      "phoboslite:normal"
+    ]
+  },
+  "overwatch": {
+    "sounds": [
+      "phoboslite:overwatch"
+    ]
+  },
+  "shot": {
+    "sounds": [
+      "phoboslite:shot"
+    ]
+  },
+  "soft": {
+    "sounds": [
+      "phoboslite:soft"
+    ]
+  },
+  "sword": {
+    "sounds": [
+      "phoboslite:sword"
+    ]
+  },
+  "wood": {
+    "sounds": [
+      "phoboslite:wood"
+    ]
+  },
+  "vine": {
+    "sounds": [
+      "phoboslite:vine"
+    ]
+  }
+}

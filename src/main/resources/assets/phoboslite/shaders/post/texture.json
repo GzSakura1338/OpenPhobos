@@ -1,0 +1,75 @@
+{
+  "targets": [
+    "bufIn",
+    "origin",
+    "page",
+    "swap",
+    "bufOut"
+  ],
+  "passes": [
+    {
+      "name": "blit",
+      "intarget": "bufIn",
+      "outtarget": "origin",
+      "uniforms": []
+    },
+    {
+      "name": "phoboslite:texture_page",
+      "intarget": "bufIn",
+      "outtarget": "page",
+      "uniforms": [],
+      "auxtargets": [
+        {
+          "name": "TextureSampler",
+          "id": "shader",
+          "width": 1,
+          "height": 1,
+          "bilinear": false
+        }
+      ]
+    },
+    {
+      "name": "phoboslite:texture",
+      "intarget": "bufIn",
+      "outtarget": "swap",
+      "auxtargets": [
+        {
+          "name": "PageSampler",
+          "id": "page"
+        }
+      ]
+    },
+    {
+      "name": "phoboslite:blur_mask",
+      "intarget": "swap",
+      "outtarget": "bufIn",
+      "uniforms": [
+        { "name": "direction", "values": [1.0, 0.0] }
+      ]
+    },
+    {
+      "name": "phoboslite:blur_mask",
+      "intarget": "bufIn",
+      "outtarget": "swap",
+      "uniforms": [
+        { "name": "direction", "values": [0.0, 1.0] }
+      ]
+    },
+    {
+      "name": "phoboslite:texture_line",
+      "intarget": "swap",
+      "outtarget": "bufOut",
+      "auxtargets": [
+        {
+          "name": "MaskSampler",
+          "id": "origin"
+        },
+        {
+          "name": "PageSampler",
+          "id": "page"
+        }
+      ],
+      "uniforms": []
+    }
+  ]
+}

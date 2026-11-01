@@ -1,0 +1,85 @@
+plugins {
+    id 'fabric-loom' version '1.16.3'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://maven.fabricmc.net/' }
+    maven { url = 'https://jitpack.io' }
+}
+
+loom {
+    accessWidenerPath = file('src/main/resources/phoboslite.accesswidener')
+    mixin {
+        useLegacyMixinAp = true
+        defaultRefmapName = 'phoboslite-refmap.json'
+    }
+    runs {
+        client {
+            ideConfigGenerated(false)
+        }
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    compileOnly 'io.github.llamalad7:mixinextras-common:0.4.1'
+    annotationProcessor 'io.github.llamalad7:mixinextras-common:0.4.1'
+    compileOnly 'org.projectlombok:lombok:1.18.46'
+    annotationProcessor 'org.projectlombok:lombok:1.18.46'
+
+    testImplementation platform('org.junit:junit-bom:5.10.3')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // 原 jar 里内嵌的第三方库（逐类结构与官方发布物一致，见 SCOPE.md）
+    // 只取这几个库自身的类：原 jar 里同样只内嵌了它们自己的类，没有它们的传递依赖（例如 discord-rpc-release 的本地库）
+    ['com.github.weisj:jsvg:1.7.2', 'org.lwjgl:lwjgl-nanovg:3.3.3', 'com.github.MinnDevelopment:java-discord-rpc:v2.0.2'].each { coordinate ->
+        implementation(coordinate) { transitive = false }
+        include(coordinate) { transitive = false }
+    }
+
+    // 原 jar 内嵌了 Minecraft 不自带的三个 netty 模块（版本与 MC 的 netty 4.1.97.Final 一致）
+    ['netty-handler-proxy', 'netty-codec-http', 'netty-codec-socks'].each { artifact ->
+        implementation("io.netty:${artifact}:4.1.97.Final") { transitive = false }
+        include("io.netty:${artifact}:4.1.97.Final") { transitive = false }
+    }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 21
+    options.encoding = 'UTF-8'
+    options.compilerArgs += ['-Xmaxerrs', '100000', '-Xmaxwarns', '10']
+}
+
+processResources {
+    inputs.property 'version', project.version
+}
+
+test {
+    useJUnitPlatform()
+    minHeapSize = '64m'
+    maxHeapSize = '384m'
+    jvmArgs '-XX:+UseSerialGC'
+    testLogging {
+        events 'passed', 'failed', 'skipped'
+        exceptionFormat = 'full'
+    }
+}

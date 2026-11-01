@@ -1,0 +1,11 @@
+build/
+.gradle/
+run/
+logs/
+out/
+*.iml
+.idea/*
+!.idea/runConfigurations/
+.idea/runConfigurations/*
+!.idea/runConfigurations/Minecraft_Client.xml
+src/test/

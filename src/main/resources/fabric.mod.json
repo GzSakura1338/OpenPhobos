@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "phobos",
+	"version": "1.6.6",
+	"name": "Phobos",
+	"description": "Minecraft client",
+	"authors": [
+		"GurteX"
+	],
+	"contact": {
+		"homepage": "https://discord.gg/3arthh4ck",
+		"issues": "https://github.com/GurteX/phobos/issues"
+	},
+	"license": "All Rights Reserved",
+	"icon": "assets/phoboslite/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+          	"org.phobos.drm.loader.PhobosInitializer",
+			"org.phobos.drm.loader.PhobosInternal"
+		],
+		"preLaunch": [
+			"org.phobos.drm.launch.PhobosLaunchService"
+		]
+	},
+	"mixins": [
+		"phoboslite.mixins.json"
+	],
+	"accessWidener": "phoboslite.accesswidener",
+	"depends": {
+		"fabricloader": ">=0.15.11",
+		"minecraft": "~1.21",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"breaks": {
+		"future": "*",
+		"mio": "*",
+		"meteor-client": "*"
+	}
+}

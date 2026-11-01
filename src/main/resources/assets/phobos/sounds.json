@@ -1,0 +1,17 @@
+{
+  "lobotomy": {
+    "sounds": [
+      "phobos:lobotomy"
+    ]
+  },
+  "click": {
+    "sounds": [
+      "phobos:click"
+    ]
+  },
+  "switch": {
+    "sounds": [
+      "phobos:switch"
+    ]
+  }
+}

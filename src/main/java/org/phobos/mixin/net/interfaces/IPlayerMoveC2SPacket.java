@@ -1,0 +1,53 @@
+package org.phobos.mixin.net.interfaces;
+
+import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Mutable;
+import org.spongepowered.asm.mixin.gen.Accessor;
+
+@Mixin(PlayerMoveC2SPacket.class)
+public interface IPlayerMoveC2SPacket {
+   @Mutable
+   @Accessor("x")
+   double getX();
+
+   @Mutable
+   @Accessor("y")
+   void setY(double var1);
+
+   @Mutable
+   @Accessor("pitch")
+   float getPitch();
+
+   @Mutable
+   @Accessor("z")
+   void setZ(double var1);
+
+   @Mutable
+   @Accessor("pitch")
+   void setPitch(float var1);
+
+   @Mutable
+   @Accessor("z")
+   double getZ();
+
+   @Mutable
+   @Accessor("y")
+   double getY();
+
+   @Mutable
+   @Accessor("x")
+   void setX(double var1);
+
+   @Mutable
+   @Accessor("yaw")
+   float getYaw();
+
+   @Mutable
+   @Accessor("onGround")
+   void setOnGround(boolean var1);
+
+   @Mutable
+   @Accessor("yaw")
+   void setYaw(float var1);
+}
